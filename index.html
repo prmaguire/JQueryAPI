@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PMaguire JQuery API</title>
+    <!-- Bootstrap and jquery -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <!-- Building the table with the boot strap dark table theme -->
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Image</th>
+        </tr>
+      </thead>
+      <tbody id="dataHere"></tbody>
+    </table>
+    <script>
+      //fetching from the random user api using jquery
+      $.ajax({
+        url: "https://randomuser.me/api/?results=1000",
+        dataType: "json",
+        success: function (data) {
+          console.log(data);
+          console.log(data.results[0].picture.thumbnail);
+          //for loop that appends the random user data to the table
+          for (let i = 0; i <= 1000; i++) {
+            $("#dataHere").append(
+              `<tr><th scope="row">${[i]}</th><td>${
+                data.results[i].name.title
+              }</td><td>${data.results[i].name.first}</td><td>${
+                data.results[i].name.last
+              }</td><td><img src="${
+                data.results[i].picture.thumbnail
+              }" alt="profilePic" height=100 width=100></img></td></tr>`
+            );
+          }
+        },
+      });
+    </script>
+  </body>
+</html>
